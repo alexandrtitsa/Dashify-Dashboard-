@@ -1,0 +1,26 @@
+@use 'sass:map';
+
+$breakpoints: (
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+);
+
+@mixin respond-to($breakpoint) {
+  $raw-value: map.get($breakpoints, $breakpoint);
+
+  @if $raw-value {
+    @media (min-width: $raw-value) {
+      @content;
+    }
+  } @else {
+    @error "Невідомий breakpoint: #{$breakpoint}. Доступні: #{map.keys($breakpoints)}";
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

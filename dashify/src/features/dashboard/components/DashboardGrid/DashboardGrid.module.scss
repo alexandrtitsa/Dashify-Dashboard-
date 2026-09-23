@@ -1,0 +1,25 @@
+.gridWrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem;
+
+  :global {
+    .react-grid-placeholder {
+      background-color: var(--color-primary-light, rgba(59, 130, 246, 0.15));
+      border: 2px dashed var(--color-primary, #3b82f6);
+      border-radius: var(--radius-lg, 12px);
+      transition-duration: 100ms;
+      z-index: 2;
+      user-select: none;
+    }
+
+    .react-resizable-handle {
+      opacity: 0.5;
+      transition: opacity var(--transition-fast, 0.15s);
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

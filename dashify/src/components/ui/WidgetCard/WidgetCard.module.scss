@@ -1,0 +1,91 @@
+@use '@/app/styles/mixins' as m;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  &Header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-bg-subtle);
+    user-select: none;
+  }
+
+  &DragHandle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &Title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  &Actions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  &IconBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-border);
+      color: var(--color-text-primary);
+    }
+
+    &Danger:hover {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--color-danger);
+    }
+  }
+
+  &Content {
+    flex: 1;
+    padding: 1rem;
+    position: relative;
+    overflow: auto;
+  }
+
+  &State {
+    @include m.flex-center;
+    flex-direction: column;
+    height: 100%;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    text-align: center;
+  }
+}

@@ -1,0 +1,51 @@
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 0.75rem;
+}
+
+.chartControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--color-bg-subtle);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+}
+
+.controlBtn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+
+  &Active {
+    background-color: var(--color-bg-surface);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.chartArea {
+  flex: 1;
+  min-height: 180px;
+  width: 100%;
+}

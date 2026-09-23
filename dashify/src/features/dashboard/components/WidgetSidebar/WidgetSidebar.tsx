@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Check, BarChart2, CloudSun, DollarSign, CheckSquare } from 'lucide-react';
 import { useDashboardStore } from '@/store/useDashboardStore';
-import { LiveAnnouncer } from '@/components/ui/LiveAnnouncer/LiveAnnouncer';
+import { LiveAnnouncer } from '@/components/ui';
 import type { WidgetType } from '@/types/widget';
 import styles from './WidgetSidebar.module.scss';
 

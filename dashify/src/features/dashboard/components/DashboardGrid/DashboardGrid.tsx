@@ -4,7 +4,7 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import type { Layout } from 'react-grid-layout';
 import { Loader2 } from 'lucide-react';
 import { useDashboardStore } from '@/store/useDashboardStore';
-import { WidgetCard } from '@/components/ui/WidgetCard/WidgetCard';
+import { WidgetCard } from '@/components/ui';
 import type { WidgetLayout } from '@/types/widget';
 import styles from './DashboardGrid.module.scss';
 

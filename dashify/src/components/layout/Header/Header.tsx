@@ -1,6 +1,6 @@
 import React from 'react';
 import { LayoutDashboard } from 'lucide-react';
-import { ThemeToggle } from '@/features/theme/components/ThemeToggle/ThemeToggle';
+import { ThemeToggle } from '@/features/theme';
 import styles from './Header.module.scss';
 
 export const Header: React.FC = () => {

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cn from 'classnames';
 import { GripVertical, X, AlertCircle, Loader2 } from 'lucide-react';
+import { LiveAnnouncer } from '../LiveAnnouncer/LiveAnnouncer';
 import styles from './WidgetCard.module.scss';
 
 interface WidgetCardProps {
@@ -20,19 +21,54 @@ export const WidgetCard: React.FC<WidgetCardProps> = ({
   error = null,
   onRemove,
 }) => {
+  const [announcement, setAnnouncement] = useState<string>('');
+
+  const handleRemove = () => {
+    setAnnouncement(`Віджет "${title}" видалено`);
+    if (onRemove) {
+      onRemove(id);
+    }
+  };
+
+  const handleKeyDownHandle = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setAnnouncement(`Віджет "${title}" у режимі переміщення.`);
+    }
+  };
+
   return (
-    <article className={styles.card} aria-label={`Віджет: ${title}`}>
+    <article
+      className={styles.card}
+      aria-labelledby={`widget-title-${id}`}
+      role="region"
+    >
+      <LiveAnnouncer message={announcement} />
+
       <header className={styles.cardHeader}>
-        <div className={cn('widget-drag-handle', styles.cardDragHandle)}>
+        <div
+          tabIndex={0}
+          role="button"
+          aria-grabbed="false"
+          aria-describedby={`widget-drag-desc-${id}`}
+          className={cn('widget-drag-handle', styles.cardDragHandle)}
+          onKeyDown={handleKeyDownHandle}
+        >
           <GripVertical size={16} aria-hidden="true" />
-          <h3 className={styles.cardTitle}>{title}</h3>
+          <h3 id={`widget-title-${id}`} className={styles.cardTitle}>
+            {title}
+          </h3>
+          <span id={`widget-drag-desc-${id}`} className="sr-only" style={{ display: 'none' }}>
+            Натисніть Enter або Пробіл, щоб активувати перетягування
+          </span>
         </div>
+
         {onRemove && (
           <div className={styles.cardActions}>
             <button
               type="button"
               className={cn(styles.cardIconBtn, styles.cardIconBtnDanger)}
-              onClick={() => onRemove(id)}
+              onClick={handleRemove}
               aria-label={`Видалити віджет ${title}`}
             >
               <X size={16} />
@@ -43,12 +79,12 @@ export const WidgetCard: React.FC<WidgetCardProps> = ({
 
       <div className={styles.cardContent}>
         {isLoading ? (
-          <div className={styles.cardState}>
+          <div className={styles.cardState} role="status" aria-label="Завантаження">
             <Loader2 size={24} className="spin" aria-hidden="true" />
             <span>Завантаження даних...</span>
           </div>
         ) : error ? (
-          <div className={styles.cardState}>
+          <div className={styles.cardState} role="alert">
             <AlertCircle size={24} color="var(--color-danger)" aria-hidden="true" />
             <span>Помилка: {error}</span>
           </div>
